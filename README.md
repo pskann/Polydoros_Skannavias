@@ -18,5 +18,3 @@ A simple Streamlit app template for you to modify!
    $ streamlit run streamlit_app.py
    ```
 # Polydoros_Skannavias
-# Polydoros_Skannavias
-# Polydoros_Skannavias
