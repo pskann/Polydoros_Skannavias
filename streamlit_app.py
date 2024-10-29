@@ -46,33 +46,24 @@ with col2:
     with st.container():
 
         # API Gateway URL for the Lambda function
-        api_url = "https://ytkwqq74f2.execute-api.eu-north-1.amazonaws.com/default/Distance"  # Replace with your actual API Gateway URL
+        api_url = "https://4b9pui8930.execute-api.eu-north-1.amazonaws.com/default/Square"  # Replace with your actual API Gateway URL
 
-        st.title("City Distance Calculator")
+        st.title("Square Calculator")
 
-        # City options
-        cities = ["Limassol", "Nicosia", "Larnaca", "Paphos"]
+        # Input for the user's number
+        number = st.number_input("Enter a number:", value=1, step=1)
 
-        # Dropdown menus for selecting cities
-        city1 = st.selectbox("Select the first city:", cities)
-        city2 = st.selectbox("Select the second city:", cities)
-
-        # Button to calculate distance
-        if st.button("Calculate Distance"):
-            # Make a request to the Lambda function
-            payload = {
-                "city1": city1,
-                "city2": city2
-            }
+        # Button to trigger the square calculation
+        if st.button("Calculate Square"):
+            # Call the Lambda function via API Gateway
+            payload = {"number": int(number)}
             response = requests.post(api_url, json=payload)
             
             if response.status_code == 200:
-                # Parse and display the result
-                result = response.json()
-                st.write(f"The distance between {result['city1']} and {result['city2']} is {result['distance_km']} km.")
+                data = response.json()
+                st.write(f"The square of {data['number']} is {data['square']}.")
             else:
-                st.error("Failed to calculate the distance. Please try again.")
-
+                st.error("Failed to calculate the square. Please try again.")
 
         st.write("This widget is a serveless and interactive function, where the user can add two numbers. The addition is done in the AWS Lambda Console    ")       
 
@@ -143,10 +134,12 @@ with col4:
             else:
                 st.error("Failed to fetch conversion rate.")
 
+        st.write("This widget is a serveless and interactive function, where the user inputs an amount in EUR and gets the converter amount in USD. The currency converter is done in the AWS Lambda Console")       
+
 with col5:
     with st.container():
 
-        st.title("Top 10 Highest Rated TV Series")
+        st.title("Top 10 Rated TV Series")
         
         # TMDb API key
         api_key = "bff01f6c1b2ca5e1a46def81c524f195"
@@ -181,6 +174,9 @@ with col5:
                     st.write(f"    Rating: {series['rating']}")
                     st.write("---")
 
+        st.write("This a widget, where the user click a button and it shows him the Top 10 Rated TV Series.")       
+
+
 with col6:
     with st.container():
 
@@ -209,7 +205,9 @@ with col6:
             time_series = stock_data["Time Series (5min)"]
             latest_time = next(iter(time_series))  # Get the most recent timestamp
             latest_data = time_series[latest_time]
-
             st.write(f"**The Stock for Google now is**: {latest_data['1. open']}")
+
         else:
             st.error("Error fetching stock data. Please try again later.")
+
+    st.write("This a widget, where the user clicks thes button and it shows him the stock of Google.")       
