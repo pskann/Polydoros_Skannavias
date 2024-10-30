@@ -17,7 +17,7 @@ st.markdown(
 st.markdown('<h1 class="centered-title">First Assignment</h1>', unsafe_allow_html=True)
 
 # First Row: 3 Widgets in a row
-col1, spacer1, col2, spacer2, col3 = st.columns([3, 1, 3, 1, 3])
+col1, spacer1, col2, spacer2, col3 = st.columns([3, 1, 3.5, 1, 3])
 
 with col1:
     with st.container():
@@ -46,7 +46,7 @@ with col2:
     with st.container():
 
         # API Gateway URL for the Lambda function
-        api_url = "https://4b9pui8930.execute-api.eu-north-1.amazonaws.com/default/Square"  # Replace with your actual API Gateway URL
+        api_url = "https://5najwap355ouoz4k2lwsusw3iq0twxuu.lambda-url.eu-north-1.on.aws/"  # Replace with your actual API Gateway URL
 
         st.title("Square Calculator")
 
@@ -65,7 +65,7 @@ with col2:
             else:
                 st.error("Failed to calculate the square. Please try again.")
 
-        st.write("This widget is a serveless and interactive function, where the user can add two numbers. The addition is done in the AWS Lambda Console    ")       
+        st.write("This widget is a serveless and interactive function, where the user can put a number and receive the square of this number. The square function is done in the AWS Lambda Console ")       
 
 
 with col3:
@@ -210,4 +210,4 @@ with col6:
         else:
             st.error("Error fetching stock data. Please try again later.")
 
-    st.write("This a widget, where the user clicks thes button and it shows him the stock of Google.")       
+    st.write("This a widget, where the user clicks thes button and it shows him the stock of Google.")
