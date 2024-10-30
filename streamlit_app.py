@@ -17,14 +17,14 @@ st.markdown(
 st.markdown('<h1 class="centered-title">First Assignment</h1>', unsafe_allow_html=True)
 
 # First Row: 3 Widgets in a row
-col1, spacer1, col2, spacer2, col3 = st.columns([3, 1, 3.5, 1, 3])
+col1, spacer1, col2, spacer2, col3 = st.columns([1.5, 0.5, 1.5, 0.5, 1.5])
 
 with col1:
     with st.container():
 
         st.title("Welcome")
 
-        # Bring api from AWS
+        # API Gateway URL for the Lambda function
         api_url = "https://4v19ka1q3g.execute-api.eu-north-1.amazonaws.com/default/Welcome"
 
         # Button to trigger the serverless function
@@ -46,7 +46,7 @@ with col2:
     with st.container():
 
         # API Gateway URL for the Lambda function
-        api_url = "https://5najwap355ouoz4k2lwsusw3iq0twxuu.lambda-url.eu-north-1.on.aws/"  # Replace with your actual API Gateway URL
+        api_url = "https://5najwap355ouoz4k2lwsusw3iq0twxuu.lambda-url.eu-north-1.on.aws/"
 
         st.title("Square Calculator")
 
@@ -55,10 +55,12 @@ with col2:
 
         # Button to trigger the square calculation
         if st.button("Calculate Square"):
+
             # Call the Lambda function via API Gateway
             payload = {"number": int(number)}
             response = requests.post(api_url, json=payload)
             
+            # Bring result
             if response.status_code == 200:
                 data = response.json()
                 st.write(f"The square of {data['number']} is {data['square']}.")
@@ -79,7 +81,7 @@ with col3:
         # OpenWeatherMap API key
         api_key = "e1d1151f153c6f12e0d4c5800d29b5d5"
 
-        # How to get weather data from openweathemap
+        # How to get weather data from Openweathemap
         def get_weather(city, api_key):
             base_url = "http://api.openweathermap.org/data/2.5/weather?"
             complete_url = base_url + "q=" + city + "&appid=" + api_key + "&units=metric"
@@ -121,10 +123,11 @@ with col4:
         amount_eur = st.number_input("Enter amount in EUR:", min_value=0.0, value=1.0)
 
         if st.button("Convert to USD"):
-            # Make a request to the Lambda function through API Gateway
+
+            # Request to the Lambda function through API Gateway to make the convertion
             response = requests.post(api_url, json={"amount": amount_eur})
 
-            # How the convertion is done
+            # How the convertion result is received and present
             if response.status_code == 200:
                 result = response.json()
                 exchange_rate = result["exchange_rate"]
